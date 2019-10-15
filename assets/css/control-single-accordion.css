@@ -1,0 +1,47 @@
+/* ==========================================================================
+   Single Accordion
+   ========================================================================== */
+.single-accordion-toggle {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 24px;
+    padding: 10px 5px 5px 0;
+    cursor: pointer;
+}
+.accordion-icon-toggle {
+    font-size: 18px;
+    margin-left: 5px;
+    margin-top: 5px;
+    -webkit-transition: -webkit-transform 0.3s ease-in-out;
+    -moz-transition: -moz-transform 0.3s ease-in-out;
+    -o-transition: -o-transform 0.3s ease-in-out;
+    transition: transform 0.3s ease-in-out;
+}
+.single-accordion-toggle-rotate .accordion-icon-toggle {
+    filter: progid: DXImageTransform.Microsoft.BasicImage(rotation=-0.5);
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    display: inline-block;
+}
+.single-accordion {
+    display: none;
+}
+.single-accordion ul {
+    margin: 0;
+    padding: 0;
+}
+.single-accordion li {
+    background-color: #e4e4e4;
+    color: #888;
+    width: 115px;
+    display: inline-block;
+    padding: 5px;
+    margin: 5px;
+    text-align: center;
+}
+.single-accordion li i {
+    margin-left: 5px;
+}

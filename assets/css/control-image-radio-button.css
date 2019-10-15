@@ -1,0 +1,13 @@
+/* ==========================================================================
+   Image Radio Buttons
+   ========================================================================== */
+.image_radio_button_control .radio-button-label > input {
+    display: none;
+}
+.image_radio_button_control .radio-button-label > img {
+    cursor: pointer;
+    border: 3px solid #ddd;
+}
+.image_radio_button_control .radio-button-label > input:checked + img {
+    border: 3px solid #2885bb;
+}

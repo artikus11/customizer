@@ -1,0 +1,14 @@
+
+/* ==========================================================================
+   Image Checkboxes
+   ========================================================================== */
+.image_checkbox_control .checkbox-label > input {
+    display: none;
+}
+.image_checkbox_control .checkbox-label > img {
+    cursor: pointer;
+    border: 3px solid #ddd;
+}
+.image_checkbox_control .checkbox-label > input:checked + img {
+    border: 3px solid #2885bb;
+}
