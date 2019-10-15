@@ -1,20 +1,20 @@
 <?php
 
-require get_stylesheet_directory() . '/includes/customizer/custom-controls/class-control-dropdown-select2.php';
-require get_stylesheet_directory() . '/includes/customizer/custom-controls/class-control-final-line.php';
-require get_stylesheet_directory() . '/includes/customizer/custom-controls/class-control-image-checkbox.php';
-require get_stylesheet_directory() . '/includes/customizer/custom-controls/class-control-image-radio-button.php';
-require get_stylesheet_directory() . '/includes/customizer/custom-controls/class-control-images-slider.php';
-require get_stylesheet_directory() . '/includes/customizer/custom-controls/class-control-simple-notice.php';
-require get_stylesheet_directory() . '/includes/customizer/custom-controls/class-control-single-accordion.php';
-require get_stylesheet_directory() . '/includes/customizer/custom-controls/class-control-range-field.php';
-require get_stylesheet_directory() . '/includes/customizer/custom-controls/class-control-sortable-repeater.php';
-require get_stylesheet_directory() . '/includes/customizer/custom-controls/class-control-text-radio-button.php';
-require get_stylesheet_directory() . '/includes/customizer/custom-controls/class-control-tinymce.php';
-require get_stylesheet_directory() . '/includes/customizer/custom-controls/class-control-title-section.php';
-require get_stylesheet_directory() . '/includes/customizer/custom-controls/class-control-toggle-switch.php';
-require get_stylesheet_directory() . '/includes/customizer/custom-controls/class-custom-panel.php';
-require get_stylesheet_directory() . '/includes/customizer/custom-controls/class-custom-section.php';
+require __DIR__ . '/custom-controls/class-control-dropdown-select2.php';
+require __DIR__ . '/custom-controls/class-control-final-line.php';
+require __DIR__ . '/custom-controls/class-control-image-checkbox.php';
+require __DIR__ . '/custom-controls/class-control-image-radio-button.php';
+require __DIR__ . '/custom-controls/class-control-images-slider.php';
+require __DIR__ . '/custom-controls/class-control-simple-notice.php';
+require __DIR__ . '/custom-controls/class-control-single-accordion.php';
+require __DIR__ . '/custom-controls/class-control-range-field.php';
+require __DIR__ . '/custom-controls/class-control-sortable-repeater.php';
+require __DIR__ . '/custom-controls/class-control-text-radio-button.php';
+require __DIR__ . '/custom-controls/class-control-tinymce.php';
+require __DIR__ . '/custom-controls/class-control-title-section.php';
+require __DIR__ . '/custom-controls/class-control-toggle-switch.php';
+require __DIR__ . '/custom-controls/class-custom-panel.php';
+require __DIR__ . '/custom-controls/class-custom-section.php';
 
 /**
  * URL sanitization

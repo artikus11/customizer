@@ -1,12 +1,12 @@
 <?php
 
-require get_stylesheet_directory() . '/includes/customizer/custom-control.php';
+require __DIR__ . '/custom-control.php';
 
 
 /**
  * Binds JS handlers to make Theme Customizer preview reload changes asynchronously.
  */
-function smd_customize_preview_js() {
+function customize_preview_js() {
 
 	wp_enqueue_script(
 		'current-customizer-preview',
@@ -18,13 +18,13 @@ function smd_customize_preview_js() {
 
 }
 
-add_action( 'customize_preview_init', 'smd_customize_preview_js' );
+add_action( 'customize_preview_init', 'customize_preview_js' );
 /**
  * Add postMessage support for site title and description for the Theme Customizer.
  *
  * @param WP_Customize_Manager $wp_customize Theme Customizer object.
  */
-function smd_customize_register( $wp_customize ) {
+function customize_register_options( $wp_customize ) {
 
 	$wp_customize->remove_section( 'header_image' );
 	$wp_customize->remove_section( 'colors' );
@@ -37,7 +37,7 @@ function smd_customize_register( $wp_customize ) {
 	/**
 	 * Add section Theme Customizer.
 	 */
-	$wp_customize->add_section(
+/*	$wp_customize->add_section(
 		'header_theme',
 		array(
 			'title'       => 'Шапка',
@@ -86,12 +86,12 @@ function smd_customize_register( $wp_customize ) {
 		);
 	}
 
-	$transport = ( $wp_customize->selective_refresh ? 'postMessage' : 'refresh' );
+	$transport = ( $wp_customize->selective_refresh ? 'postMessage' : 'refresh' );*/
 
 	/**
 	 * Add header custom control Theme Customizer.
 	 */
-	$wp_customize->add_setting(
+/*	$wp_customize->add_setting(
 		'header_title',
 		array(
 			'default'           => '',
@@ -484,12 +484,12 @@ function smd_customize_register( $wp_customize ) {
 				'priority'    => 35,
 			)
 		)
-	);
+	);*/
 
 	/**
 	 * Add footer custom control Theme Customizer.
 	 */
-	$wp_customize->add_setting(
+/*	$wp_customize->add_setting(
 		'footer_title',
 		array(
 			'default'           => '',
@@ -648,12 +648,12 @@ function smd_customize_register( $wp_customize ) {
 				return smd_text( 'footer_description' );
 			},
 		)
-	);
+	);*/
 
 	/**
 	 * Add footer custom control Theme Customizer.
 	 */
-	$wp_customize->add_setting(
+/*	$wp_customize->add_setting(
 		'social_profile_settings',
 		array(
 			'default'           => '',
@@ -684,11 +684,11 @@ function smd_customize_register( $wp_customize ) {
 			'container_inclusive' => false,
 			'render_callback'     => 'smd_social',
 		)
-	);
+	);*/
 	/**
 	 * Add footer custom control Theme Customizer.
 	 */
-	$wp_customize->add_setting(
+/*	$wp_customize->add_setting(
 		'feedback_box_form',
 		array(
 			'default'           => '',
@@ -747,8 +747,8 @@ function smd_customize_register( $wp_customize ) {
 				'priority'    => 20,
 			)
 		)
-	);
+	);*/
 
 
 }
-add_action( 'customize_register', 'smd_customize_register' );
+add_action( 'customize_register', 'customize_register_options' );
