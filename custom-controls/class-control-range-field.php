@@ -24,7 +24,7 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 
 			wp_enqueue_script(
 				'skyrocket-control-slider-field-js',
-				__DIR__ . '/../assets/js/control-slider-field.js',
+				CUSTOMIZER_DIR_ASSETS  . '/assets/js/control-slider-field.js',
 				array(
 					'jquery',
 					'jquery-ui-core',
@@ -32,7 +32,7 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 				'1.0',
 				true
 			);
-			wp_enqueue_style( 'skyrocket-control-slider-field-css', __DIR__ . '/../assets/css/control-slider-field.css', array(), '1.0', 'all' );
+			wp_enqueue_style( 'skyrocket-control-slider-field-css', CUSTOMIZER_DIR_ASSETS  . '/assets/css/control-slider-field.css', array(), '1.0', 'all' );
 		}
 
 

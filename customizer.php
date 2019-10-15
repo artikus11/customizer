@@ -1,9 +1,10 @@
 <?php
+define( 'CUSTOMIZER_DIR', __DIR__ );
+define( 'CUSTOMIZER_DIR_ASSETS', get_template_directory_uri() . '/' . basename( dirname( CUSTOMIZER_DIR, 1 ) ) . '/' . basename( CUSTOMIZER_DIR ) );
 /**
  * Add controls.
  */
 require __DIR__ . '/custom-control.php';
-
 
 /**
  * Binds JS handlers to make Theme Customizer preview reload changes asynchronously.
@@ -12,7 +13,7 @@ function customize_preview_js() {
 
 	wp_enqueue_script(
 		'current-customizer-preview',
-		__DIR__ .'/assets/js/customizer-preview.js',
+		CUSTOMIZER_DIR . '/assets/js/customizer-preview.js',
 		array( 'customize-preview' ),
 		'1.1.0',
 		true
@@ -24,7 +25,7 @@ add_action( 'customize_preview_init', 'customize_preview_js' );
 /**
  * Add postMessage support for site title and description for the Theme Customizer.
  *
- * @param WP_Customize_Manager $wp_customize Theme Customizer object.
+ * @param  WP_Customize_Manager $wp_customize Theme Customizer object.
  */
 function customize_register_options( $wp_customize ) {
 
@@ -41,7 +42,7 @@ function customize_register_options( $wp_customize ) {
 	 * Add section Theme Customizer.
 	 */
 	$wp_customize->add_section(
-		'header_theme',
+		'section_header_theme',
 		array(
 			'title'       => 'Шапка',
 			'description' => '',
@@ -49,7 +50,7 @@ function customize_register_options( $wp_customize ) {
 		)
 	);
 	$wp_customize->add_section(
-		'footer_theme',
+		'section_footer_theme',
 		array(
 			'title'       => 'Подвал',
 			'description' => '',
@@ -57,67 +58,328 @@ function customize_register_options( $wp_customize ) {
 		)
 	);
 	$wp_customize->add_section(
-		'social_profile',
+		'section_social_profile',
 		array(
 			'title'    => 'Профили на соцсети',
-			'priority' => 35,
-		)
-	);
-/*	$wp_customize->add_section(
-		'header_theme',
-		array(
-			'title'       => 'Шапка',
-			'description' => '',
-			'priority'    => 20,
+			'priority' => 40,
 		)
 	);
 	$wp_customize->add_section(
-		'feedback_box',
+		'section_portfolio',
 		array(
-			'title'       => 'Форма заявки',
-			'description' => '',
-			'priority'    => 25,
+			'title'    => 'Портфолио',
+			'priority' => 50,
 		)
 	);
 	$wp_customize->add_section(
-		'footer_theme',
+		'section_support',
 		array(
-			'title'       => 'Подвал',
-			'description' => '',
-			'priority'    => 30,
-		)
-	);
-	$wp_customize->add_section(
-		'social_profile',
-		array(
-			'title'    => 'Профили на соцсети',
-			'priority' => 35,
+			'title'    => 'Поддержка',
+			'priority' => 60,
 		)
 	);
 
-	if ( isset( $wp_customize->selective_refresh ) ) {
-		$wp_customize->selective_refresh->add_partial(
-			'blogname',
-			array(
-				'selector'        => '.site-title a',
-				'render_callback' => 'smd_customize_partial_blogname',
-			)
-		);
-		$wp_customize->selective_refresh->add_partial(
-			'blogdescription',
-			array(
-				'selector'        => '.site-description',
-				'render_callback' => 'smd_customize_partial_blogdescription',
-			)
-		);
-	}
+	$wp_customize->add_setting(
+		'header_title',
+		array(
+			'default'           => '',
+			'transport'         => $transport,
+			'type'              => 'option',
+			'sanitize_callback' => '',
+		)
+	);
+	$wp_customize->add_control(
+		new Art_Title_Section_Custom_Control(
+			$wp_customize, 'header_title', array(
+				             'label'       => 'Настройки шапки сайта',
+				             'description' => 'В данной секции можно управлять выводом данных в шапке',
+				             'section'     => 'section_header_theme',
+				             'priority'    => 5,
+			             )
+		)
+	);
 
-	$transport = ( $wp_customize->selective_refresh ? 'postMessage' : 'refresh' );*/
+	$wp_customize->add_setting(
+		'social_header',
+		array(
+			'default'           => '',
+			'transport'         => $transport,
+			'type'              => 'option',
+			//'sanitize_callback' => 'customizer_url_sanitization',
+		)
+	);
+
+	$wp_customize->add_control(
+		new Skyrocket_Sortable_Repeater_Custom_Control(
+			$wp_customize, 'social_header', array(
+				             'label'         => 'Соцсети',
+				             'description'   => esc_html__( 'Укажите ссылки на профили в соцсетях' ),
+				             'section'       => 'section_social_profile',
+				             'button_labels' => array(
+					             'add' => 'Добавить',
+				             ),
+			             )
+		)
+	);
+
+	$wp_customize->add_setting(
+		'settings_addon_footer_cr',
+		array(
+			'label'             => 'Копирайт',
+			'transport'         => $transport,
+			'type'              => 'option',
+			'sanitize_callback' => 'sanitize_text_field',
+		)
+	);
+	$wp_customize->add_control(
+		'settings_addon_footer_cr',
+		array(
+			'id'      => 'settings_addon_footer_cr',
+			'label'   => 'Копирайт',
+			'type'    => 'text',
+			'section' => 'section_footer_theme',
+		)
+	);
+
+	$wp_customize->add_setting(
+		'settings_addon_footer_logo',
+		array(
+			'sanitize_callback' => 'esc_url_raw',
+			'transport'         => $transport,
+			'type'              => 'option',
+		)
+	);
+
+	$wp_customize->add_control(
+		new WP_Customize_Image_Control(
+			$wp_customize, 'settings_addon_footer_logo', array(
+				             'label'       => 'Загрузить логотип',
+				             'section'     => 'section_footer_theme',
+				             'description' => 'Укажите изображение, которое будет выводиться в подвале',
+			             )
+		)
+	);
+
+	$wp_customize->add_setting(
+		'settings_addon_portfolio_name',
+		array(
+			'label'             => 'Текст заказа',
+			'transport'         => $transport,
+			'type'              => 'option',
+			'sanitize_callback' => 'esc_html',
+		)
+	);
+	$wp_customize->add_control(
+		'settings_addon_portfolio_name',
+		array(
+			'id'      => 'settings_addon_portfolio_name',
+			'label'   => 'Текст заказа',
+			'type'    => 'text',
+			'section' => 'section_portfolio',
+		)
+	);
+	$wp_customize->add_setting(
+		'settings_addon_portfolio_phone',
+		array(
+			'label'             => 'Телефон',
+			'transport'         => $transport,
+			'type'              => 'option',
+			'sanitize_callback' => 'esc_html',
+		)
+	);
+	$wp_customize->add_control(
+		'settings_addon_portfolio_phone',
+		array(
+			'id'      => 'settings_addon_portfolio_phone',
+			'label'   => 'Телефон',
+			'type'    => 'text',
+			'section' => 'section_portfolio',
+		)
+	);
+	$wp_customize->add_setting(
+		'settings_addon_portfolio_desc',
+		array(
+			'label'             => 'Предупреждающий текст',
+			'transport'         => $transport,
+			'type'              => 'option',
+			'sanitize_callback' => 'sanitize_textarea_field',
+		)
+	);
+	$wp_customize->add_control(
+		'settings_addon_portfolio_desc',
+		array(
+			'id'      => 'settings_addon_portfolio_desc',
+			'label'   => 'Предупреждающий текст',
+			'type'    => 'textarea',
+			'section' => 'section_portfolio',
+		)
+	);
+
+	$wp_customize->add_setting(
+		'settings_addon_support_title',
+		array(
+			'label'             => 'Заголовок',
+			'transport'         => $transport,
+			'type'              => 'option',
+			'sanitize_callback' => 'esc_html',
+		)
+	);
+	$wp_customize->add_control(
+		'settings_addon_support_title',
+		array(
+			'id'      => 'settings_addon_support_title',
+			'label'   => 'Заголовок',
+			'type'    => 'text',
+			'section' => 'section_support',
+		)
+	);
+	$wp_customize->add_setting(
+		'settings_addon_support_desc',
+		array(
+			'label'             => 'Описание',
+			'transport'         => $transport,
+			'type'              => 'option',
+			'sanitize_callback' => 'sanitize_textarea_field',
+		)
+	);
+	$wp_customize->add_control(
+		'settings_addon_support_desc',
+		array(
+			'id'      => 'settings_addon_support_desc',
+			'label'   => 'Описание',
+			'type'    => 'textarea',
+			'section' => 'section_support',
+		)
+	);
+
+	$wp_customize->add_setting(
+		'settings_addon_support_link',
+		array(
+			'label'             => 'Ссылка',
+			'transport'         => $transport,
+			'type'              => 'option',
+			'sanitize_callback' => 'esc_html',
+		)
+	);
+	$wp_customize->add_control(
+		'settings_addon_support_link',
+		array(
+			'id'      => 'settings_addon_support_link',
+			'label'   => 'Ссылка',
+			'type'    => 'text',
+			'section' => 'section_support',
+		)
+	);
+
+	$wp_customize->add_setting(
+		'settings_addon_support_text_link',
+		array(
+			'label'             => 'Текст ссылки',
+			'transport'         => $transport,
+			'type'              => 'option',
+			'sanitize_callback' => 'esc_html',
+		)
+	);
+	$wp_customize->add_control(
+		'settings_addon_support_text_link',
+		array(
+			'id'      => 'settings_addon_support_title',
+			'label'   => 'Текст ссылки',
+			'type'    => 'text',
+			'section' => 'section_support',
+		)
+	);
+
+	$wp_customize->add_setting(
+		'settings_addon_footer_desc_top',
+		array(
+			'label'             => 'Описание верхнее',
+			'transport'         => $transport,
+			'type'              => 'option',
+			'sanitize_callback' => 'sanitize_textarea_field',
+		)
+	);
+	$wp_customize->add_control(
+		'settings_addon_footer_desc_top',
+		array(
+			'id'      => 'settings_addon_footer_desc_top',
+			'label'   => 'Описание верхнее',
+			'type'    => 'textarea',
+			'section' => 'section_footer_theme',
+		)
+	);
+	$wp_customize->add_setting(
+		'settings_addon_footer_desc_bottom',
+		array(
+			'label'             => 'Описание нижнее',
+			'transport'         => $transport,
+			'type'              => 'option',
+			'sanitize_callback' => 'sanitize_textarea_field',
+		)
+	);
+	$wp_customize->add_control(
+		'settings_addon_footer_desc_bottom',
+		array(
+			'id'      => 'settings_addon_footer_desc_bottom',
+			'label'   => 'Описание нижнее',
+			'type'    => 'textarea',
+			'section' => 'section_footer_theme',
+		)
+	);
+	/*	$wp_customize->add_section(
+			'header_theme',
+			array(
+				'title'       => 'Шапка',
+				'description' => '',
+				'priority'    => 20,
+			)
+		);
+		$wp_customize->add_section(
+			'feedback_box',
+			array(
+				'title'       => 'Форма заявки',
+				'description' => '',
+				'priority'    => 25,
+			)
+		);
+		$wp_customize->add_section(
+			'footer_theme',
+			array(
+				'title'       => 'Подвал',
+				'description' => '',
+				'priority'    => 30,
+			)
+		);
+		$wp_customize->add_section(
+			'social_profile',
+			array(
+				'title'    => 'Профили на соцсети',
+				'priority' => 35,
+			)
+		);
+
+		if ( isset( $wp_customize->selective_refresh ) ) {
+			$wp_customize->selective_refresh->add_partial(
+				'blogname',
+				array(
+					'selector'        => '.site-title a',
+					'render_callback' => 'smd_customize_partial_blogname',
+				)
+			);
+			$wp_customize->selective_refresh->add_partial(
+				'blogdescription',
+				array(
+					'selector'        => '.site-description',
+					'render_callback' => 'smd_customize_partial_blogdescription',
+				)
+			);
+		}
+
+		$transport = ( $wp_customize->selective_refresh ? 'postMessage' : 'refresh' );*/
 
 	/**
 	 * Add header custom control Theme Customizer.
-	 */
-/*	$wp_customize->add_setting(
+	 */ /*	$wp_customize->add_setting(
 		'header_title',
 		array(
 			'default'           => '',
@@ -514,8 +776,7 @@ function customize_register_options( $wp_customize ) {
 
 	/**
 	 * Add footer custom control Theme Customizer.
-	 */
-/*	$wp_customize->add_setting(
+	 */ /*	$wp_customize->add_setting(
 		'footer_title',
 		array(
 			'default'           => '',
@@ -678,8 +939,7 @@ function customize_register_options( $wp_customize ) {
 
 	/**
 	 * Add footer custom control Theme Customizer.
-	 */
-/*	$wp_customize->add_setting(
+	 */ /*	$wp_customize->add_setting(
 		'social_profile_settings',
 		array(
 			'default'           => '',
@@ -710,71 +970,70 @@ function customize_register_options( $wp_customize ) {
 			'container_inclusive' => false,
 			'render_callback'     => 'smd_social',
 		)
-	);*/
-	/**
+	);*/ /**
 	 * Add footer custom control Theme Customizer.
 	 */
-/*	$wp_customize->add_setting(
-		'feedback_box_form',
-		array(
-			'default'           => '',
-			'transport'         => $transport,
-			'type'              => 'option',
-			'sanitize_callback' => 'sanitize_text_field',
-		)
-	);
-	$wp_customize->add_control(
-		'feedback_box_form',
-		array(
-			'label'       => 'Форма заявки',
-			'description' => 'Здесь необходимо указать шорткод формы',
-			'type'        => 'text',
-			'section'     => 'feedback_box',
-			'priority'    => 10,
-		)
-	);
+	/*	$wp_customize->add_setting(
+			'feedback_box_form',
+			array(
+				'default'           => '',
+				'transport'         => $transport,
+				'type'              => 'option',
+				'sanitize_callback' => 'sanitize_text_field',
+			)
+		);
+		$wp_customize->add_control(
+			'feedback_box_form',
+			array(
+				'label'       => 'Форма заявки',
+				'description' => 'Здесь необходимо указать шорткод формы',
+				'type'        => 'text',
+				'section'     => 'feedback_box',
+				'priority'    => 10,
+			)
+		);
 
-	$wp_customize->add_setting(
-		'feedback_box_line',
-		array(
-			'default'   => '',
-			'transport' => $transport,
-		)
-	);
-	$wp_customize->add_control(
-		new Art_Final_Line_Section_Custom_Control(
-			$wp_customize,
+		$wp_customize->add_setting(
 			'feedback_box_line',
 			array(
-				'section'  => 'feedback_box',
-				'priority' => 15,
+				'default'   => '',
+				'transport' => $transport,
 			)
-		)
-	);
+		);
+		$wp_customize->add_control(
+			new Art_Final_Line_Section_Custom_Control(
+				$wp_customize,
+				'feedback_box_line',
+				array(
+					'section'  => 'feedback_box',
+					'priority' => 15,
+				)
+			)
+		);
 
-	$wp_customize->add_setting(
-		'feedback_box_description',
-		array(
-			'default'           => '',
-			'transport'         => $transport,
-			'type'              => 'option',
-			'sanitize_callback' => 'wp_kses_post',
-		)
-	);
-	$wp_customize->add_control(
-		new Skyrocket_TinyMCE_Custom_control(
-			$wp_customize,
+		$wp_customize->add_setting(
 			'feedback_box_description',
 			array(
-				'label'       => 'Описание',
-				'description' => 'В данном поле можно написать какое-то описание сайта',
-				'type'        => 'tinymce_editor',
-				'section'     => 'feedback_box',
-				'priority'    => 20,
+				'default'           => '',
+				'transport'         => $transport,
+				'type'              => 'option',
+				'sanitize_callback' => 'wp_kses_post',
 			)
-		)
-	);*/
-
+		);
+		$wp_customize->add_control(
+			new Skyrocket_TinyMCE_Custom_control(
+				$wp_customize,
+				'feedback_box_description',
+				array(
+					'label'       => 'Описание',
+					'description' => 'В данном поле можно написать какое-то описание сайта',
+					'type'        => 'tinymce_editor',
+					'section'     => 'feedback_box',
+					'priority'    => 20,
+				)
+			)
+		);*/
 
 }
+
 add_action( 'customize_register', 'customize_register_options' );

@@ -23,7 +23,7 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 		 */
 		public function enqueue() {
 
-			wp_enqueue_style( 'skyrocket-control-image-checkbox-css', __DIR__ . '/../assets/css/control-image-checkbox.css', array(), '1.0', 'all' );
+			wp_enqueue_style( 'skyrocket-control-image-checkbox-css', CUSTOMIZER_DIR_ASSETS  . '/assets/css/control-image-checkbox.css', array(), '1.0', 'all' );
 		}
 
 

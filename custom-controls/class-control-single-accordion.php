@@ -24,12 +24,12 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 
 			wp_enqueue_script(
 				'skyrocket-control-single-accordion-js',
-				__DIR__ . '/../assets/js/control-single-accordion.js',
+				CUSTOMIZER_DIR_ASSETS  . '/assets/js/control-single-accordion.js',
 				array( 'jquery' ),
 				'1.0',
 				true
 			);
-			wp_enqueue_style( 'skyrocket-control-single-accordion-css', __DIR__ . '/../assets/css/control-single-accordion.css', array(), '1.0', 'all' );
+			wp_enqueue_style( 'skyrocket-control-single-accordion-css', CUSTOMIZER_DIR_ASSETS  . '/assets/css/control-single-accordion.css', array(), '1.0', 'all' );
 		}
 
 

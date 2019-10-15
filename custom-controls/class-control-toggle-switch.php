@@ -22,7 +22,7 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 		 */
 		public function enqueue() {
 
-			wp_enqueue_style( 'skyrocket-control-toggle-switch-css', __DIR__ . '/../assets/css/control-toggle-switch.css', array(), '1.0', 'all' );
+			wp_enqueue_style( 'skyrocket-control-toggle-switch-css', CUSTOMIZER_DIR_ASSETS  . '/assets/css/control-toggle-switch.css', array(), '1.0', 'all' );
 		}
 
 

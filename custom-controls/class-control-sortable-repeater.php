@@ -35,6 +35,7 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 					'add' => 'Добавить',
 				)
 			);
+
 		}
 
 
@@ -45,7 +46,7 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 
 			wp_enqueue_script(
 				'skyrocket-control-sortable-repeater-js',
-				__DIR__ . '/../assets/js/control-sortable-repeater.js',
+				CUSTOMIZER_DIR_ASSETS . '/assets/js/control-sortable-repeater.js',
 				array(
 					'jquery',
 					'jquery-ui-core',
@@ -53,7 +54,7 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 				'1.0',
 				true
 			);
-			wp_enqueue_style( 'skyrocket-control-sortable-repeater-css', __DIR__ . '/../assets/css/control-sortable-repeater.css', array(), '1.0', 'all' );
+			wp_enqueue_style( 'skyrocket-control-sortable-repeater-css', CUSTOMIZER_DIR_ASSETS . '/assets/css/control-sortable-repeater.css', array(), '1.0', 'all' );
 		}
 
 
@@ -71,20 +72,12 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 					<span class="customize-control-description"><?php echo esc_html( $this->description ); ?></span>
 				<?php } ?>
 				<input
-					type="hidden"
-					id="<?php echo esc_attr( $this->id ); ?>"
-					name="<?php echo esc_attr( $this->id ); ?>"
-					value="<?php echo esc_attr( $this->value() ); ?>"
+					type="hidden" id="<?php echo esc_attr( $this->id ); ?>" name="<?php echo esc_attr( $this->id ); ?>" value="<?php echo esc_attr( $this->value() ); ?>"
 					class="customize-control-sortable-repeater" <?php $this->link(); ?> />
 				<div class="sortable">
 					<div class="repeater">
-						<input
-							type="text"
-							value=""
-							class="repeater-input"
-							placeholder="https://"/><span class="dashicons dashicons-sort"></span><a
-							class="customize-control-sortable-repeater-delete"
-							href="#"><span class="dashicons dashicons-no-alt"></span></a>
+						<input type="text" value="" class="repeater-input" placeholder="https://"/><span class="dashicons dashicons-sort"></span><a
+							class="customize-control-sortable-repeater-delete" href="#"><span class="dashicons dashicons-no-alt"></span></a>
 					</div>
 				</div>
 				<button class="button customize-control-sortable-repeater-add" type="button"><?php echo $this->button_labels['add']; ?></button>

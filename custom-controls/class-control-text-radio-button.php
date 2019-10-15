@@ -22,7 +22,7 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 		 */
 		public function enqueue() {
 
-			wp_enqueue_style( 'skyrocket-control-text-radio-button-css', __DIR__ . '/../assets/css/control-text-radio-button.css', array(), '1.0', 'all' );
+			wp_enqueue_style( 'skyrocket-control-text-radio-button-css', CUSTOMIZER_DIR_ASSETS  . '/assets/css/control-text-radio-button.css', array(), '1.0', 'all' );
 		}
 
 

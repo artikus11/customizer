@@ -23,11 +23,11 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 		 */
 		public function enqueue() {
 
-			/*			wp_enqueue_style( 'slider-controls-css', __DIR__ . '/../assets/css/customizer-control.css', null );*/
+			/*			wp_enqueue_style( 'slider-controls-css', CUSTOMIZER_DIR_ASSETS  . '/assets/css/customizer-control.css', null );*/
 
 			wp_enqueue_script(
 				'customizer-section-js',
-				__DIR__ . '/../assets/js/customizer-panel.js',
+				CUSTOMIZER_DIR_ASSETS  . '/assets/js/customizer-panel.js',
 				array(
 					'jquery',
 					'jquery-ui-sortable',

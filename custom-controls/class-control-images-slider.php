@@ -20,7 +20,7 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 
 			wp_enqueue_style(
 				'control-image-slider-css',
-				__DIR__ . '/../assets/css/control-image-slider.css',
+				CUSTOMIZER_DIR_ASSETS  . '/assets/css/control-image-slider.css',
 				array(),
 				1.1,
 				'all'
@@ -28,7 +28,7 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 
 			wp_enqueue_script(
 				'control-image-slider-js',
-				__DIR__ . '/../assets/js/control-image-slider.js',
+				CUSTOMIZER_DIR_ASSETS  . '/assets/js/control-image-slider.js',
 				array(
 					'jquery',
 					'jquery-ui-sortable',
