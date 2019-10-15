@@ -1,5 +1,7 @@
 <?php
-
+/**
+ * Add controls.
+ */
 require __DIR__ . '/custom-control.php';
 
 
