@@ -23,8 +23,8 @@ require __DIR__ . '/custom-controls/class-custom-section.php';
  *
  * @return string    Sanitized input
  */
-if ( ! function_exists( 'skyrocket_url_sanitization' ) ) {
-	function skyrocket_url_sanitization( $input ) {
+if ( ! function_exists( 'customize_url_sanitization' ) ) {
+	function customize_url_sanitization( $input ) {
 
 		if ( strpos( $input, ',' ) !== false ) {
 			$input = explode( ',', $input );
@@ -49,8 +49,8 @@ if ( ! function_exists( 'skyrocket_url_sanitization' ) ) {
  *
  * @return integer    Sanitized value
  */
-if ( ! function_exists( 'skyrocket_switch_sanitization' ) ) {
-	function skyrocket_switch_sanitization( $input ) {
+if ( ! function_exists( 'customize_switch_sanitization' ) ) {
+	function customize_switch_sanitization( $input ) {
 
 		/*$input = 1 ? 'yes' : 'no';
 		return $input;*/
@@ -65,14 +65,14 @@ if ( ! function_exists( 'skyrocket_switch_sanitization' ) ) {
 /**
  * Radio Button and Select sanitization
  *
- * @since Ephemeris 1.0
- *
  * @param  string        Radio Button value
  *
  * @return integer    Sanitized value
+ * @since Ephemeris 1.0
+ *
  */
-if ( ! function_exists( 'skyrocket_radio_sanitization' ) ) {
-	function skyrocket_radio_sanitization( $input, $setting ) {
+if ( ! function_exists( 'customize_radio_sanitization' ) ) {
+	function customize_radio_sanitization( $input, $setting ) {
 
 		//get the list of possible radio box or select options
 		$choices = $setting->manager->get_control( $setting->id )->choices;
@@ -92,8 +92,8 @@ if ( ! function_exists( 'skyrocket_radio_sanitization' ) ) {
  *
  * @return integer    Returned integer value
  */
-if ( ! function_exists( 'skyrocket_sanitize_integer' ) ) {
-	function skyrocket_sanitize_integer( $input ) {
+if ( ! function_exists( 'customize_sanitize_integer' ) ) {
+	function customize_sanitize_integer( $input ) {
 
 		return (int) sanitize_text_field( $input );
 	}
@@ -106,8 +106,8 @@ if ( ! function_exists( 'skyrocket_sanitize_integer' ) ) {
  *
  * @return string    Sanitized input
  */
-if ( ! function_exists( 'skyrocket_text_sanitization' ) ) {
-	function skyrocket_text_sanitization( $input ) {
+if ( ! function_exists( 'customize_text_sanitization' ) ) {
+	function customize_text_sanitization( $input ) {
 
 		if ( strpos( $input, ',' ) !== false ) {
 			$input = explode( ',', $input );
@@ -132,8 +132,8 @@ if ( ! function_exists( 'skyrocket_text_sanitization' ) ) {
  *
  * @return string    Sanitized input
  */
-if ( ! function_exists( 'skyrocket_hex_rgba_sanitization' ) ) {
-	function skyrocket_hex_rgba_sanitization( $input, $setting ) {
+if ( ! function_exists( 'customize_hex_rgba_sanitization' ) ) {
+	function customize_hex_rgba_sanitization( $input, $setting ) {
 
 		if ( empty( $input ) || is_array( $input ) ) {
 			return $setting->default;
@@ -146,8 +146,8 @@ if ( ! function_exists( 'skyrocket_hex_rgba_sanitization' ) ) {
 			// Sanitize as RGBa color
 			$input = str_replace( ' ', '', $input );
 			sscanf( $input, 'rgba(%d,%d,%d,%f)', $red, $green, $blue, $alpha );
-			$input = 'rgba(' . skyrocket_in_range( $red, 0, 255 ) . ',' . skyrocket_in_range( $green, 0, 255 ) . ',' . skyrocket_in_range( $blue, 0, 255 ) . ',' .
-			         skyrocket_in_range( $alpha, 0, 1 ) . ')';
+			$input = 'rgba(' . customize_in_range( $red, 0, 255 ) . ',' . customize_in_range( $green, 0, 255 ) . ',' . customize_in_range( $blue, 0, 255 ) . ',' .
+			         customize_in_range( $alpha, 0, 1 ) . ')';
 		}
 
 		return $input;
@@ -161,8 +161,8 @@ if ( ! function_exists( 'skyrocket_hex_rgba_sanitization' ) ) {
  *
  * @return number    Sanitized input
  */
-if ( ! function_exists( 'skyrocket_in_range' ) ) {
-	function skyrocket_in_range( $input, $min, $max ) {
+if ( ! function_exists( 'customize_in_range' ) ) {
+	function customize_in_range( $input, $min, $max ) {
 
 		if ( $input < $min ) {
 			$input = $min;
@@ -182,8 +182,8 @@ if ( ! function_exists( 'skyrocket_in_range' ) ) {
  *
  * @return string    Sanitized input
  */
-if ( ! function_exists( 'skyrocket_google_font_sanitization' ) ) {
-	function skyrocket_google_font_sanitization( $input ) {
+if ( ! function_exists( 'customize_google_font_sanitization' ) ) {
+	function customize_google_font_sanitization( $input ) {
 
 		$val = json_decode( $input, true );
 		if ( is_array( $val ) ) {
@@ -206,8 +206,8 @@ if ( ! function_exists( 'skyrocket_google_font_sanitization' ) ) {
  *
  * @return string    Sanitized input
  */
-if ( ! function_exists( 'skyrocket_date_time_sanitization' ) ) {
-	function skyrocket_date_time_sanitization( $input, $setting ) {
+if ( ! function_exists( 'customize_date_time_sanitization' ) ) {
+	function customize_date_time_sanitization( $input, $setting ) {
 
 		$datetimeformat = 'Y-m-d';
 		if ( $setting->manager->get_control( $setting->id )->include_time ) {
@@ -252,7 +252,7 @@ function customizer_repeater_sanitize( $input ) {
  *
  * @return void
  */
-function smd_customize_partial_blogname() {
+function customize_partial_blogname() {
 
 	bloginfo( 'name' );
 }
@@ -262,12 +262,12 @@ function smd_customize_partial_blogname() {
  *
  * @return void
  */
-function smd_customize_partial_blogdescription() {
+function customize_partial_blogdescription() {
 
 	bloginfo( 'description' );
 }
 
-function smd_image( $name_option ) {
+function customize_image( $name_option ) {
 
 	return wp_get_attachment_image(
 		esc_attr( $name_option ),
@@ -275,12 +275,12 @@ function smd_image( $name_option ) {
 	);
 }
 
-function smd_text( $name_option ) {
+function customize_text( $name_option ) {
 
 	return esc_attr( get_option( $name_option ) );
 }
 
-function smd_social() {
+function customize_social() {
 
 	$social_icons = explode(
 		',',

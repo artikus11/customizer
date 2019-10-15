@@ -32,7 +32,7 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 			$this->button_labels = wp_parse_args(
 				$this->button_labels,
 				array(
-					'add' => 'Äîáàâèòü',
+					'add' => 'Ð”Ð¾Ð±Ð°Ð²Ð¸Ñ‚ÑŒ',
 				)
 			);
 		}
@@ -45,7 +45,7 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 
 			wp_enqueue_script(
 				'skyrocket-control-sortable-repeater-js',
-				get_stylesheet_directory_uri() . '/includes/customizer/assets/js/control-sortable-repeater.js',
+				__DIR__ . '/../assets/js/control-sortable-repeater.js',
 				array(
 					'jquery',
 					'jquery-ui-core',
@@ -53,7 +53,7 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 				'1.0',
 				true
 			);
-			wp_enqueue_style( 'skyrocket-control-sortable-repeater-css', get_stylesheet_directory_uri() . '/includes/customizer/assets/css/control-sortable-repeater.css', array(), '1.0', 'all' );
+			wp_enqueue_style( 'skyrocket-control-sortable-repeater-css', __DIR__ . '/../assets/css/control-sortable-repeater.css', array(), '1.0', 'all' );
 		}
 
 

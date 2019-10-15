@@ -47,13 +47,13 @@
             to.length == 0 ? $($link).hide() : $($link).show();
         });
     });*/
-    wp.customize('facebook_link', function (value) {
+/*    wp.customize('facebook_link', function (value) {
         value.bind(function (to) {
             //console.log( to );
             $('.social-links a.fb-link').attr('href', to);
             var $link = $('.social-links .fb-link');
             to.length == 0 ? $($link).hide() : $($link).show();
         });
-    });
+    });*/
 
 })(jQuery);

@@ -23,7 +23,7 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 		/**
 		 * The Placeholder value to display. Select2 requires a Placeholder value to be set when using the clearall option. Default = 'Please select...'
 		 */
-		private $placeholder = 'Âûáðàòü...';
+		private $placeholder = 'Ð’Ñ‹Ð±Ñ€Ð°Ñ‚ÑŒ...';
 
 
 		/**
@@ -51,12 +51,12 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 			wp_enqueue_script( 'skyrocket-control-select2-js', 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js', array( 'jquery' ), '4.0.6', true );
 			wp_enqueue_script(
 				'skyrocket-control-dropdown-select2-js',
-				get_stylesheet_directory_uri() . '/includes/customizer/assets/js/control-dropdown-select2.js',
+				__DIR__ . '/../assets/js/control-dropdown-select2.js',
 				array( 'skyrocket-select2-js', 'pages-controls-js' ),
 				'1.0',
 				true
 			);
-			wp_enqueue_style( 'skyrocket-control-dropdown-select2-css', get_stylesheet_directory_uri() . '/includes/customizer/assets/css/control-dropdown-select2.css', array(), '1.1', 'all' );
+			wp_enqueue_style( 'skyrocket-control-dropdown-select2-css', __DIR__ . '/../assets/css/control-dropdown-select2.css', array(), '1.1', 'all' );
 			wp_enqueue_style( 'skyrocket-select2-css', 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css', array(), '4.0.6', 'all' );
 		}
 

@@ -23,7 +23,7 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 		 */
 		public function enqueue() {
 
-			wp_enqueue_style( 'skyrocket-control-image-radio-button-css', get_stylesheet_directory_uri() . '/includes/customizer/assets/css/control-image-radio-button.css', array(), '1.0', 'all' );
+			wp_enqueue_style( 'skyrocket-control-image-radio-button-css', __DIR__ . '/../assets/css/control-image-radio-button.css', array(), '1.0', 'all' );
 		}
 
 

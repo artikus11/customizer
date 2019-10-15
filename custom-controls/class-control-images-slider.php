@@ -1,4 +1,5 @@
 <?php
+
 if ( class_exists( 'WP_Customize_Control' ) ) {
 
 	/**
@@ -19,7 +20,7 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 
 			wp_enqueue_style(
 				'control-image-slider-css',
-				get_stylesheet_directory_uri() . '/includes/customizer/assets/css/control-image-slider.css',
+				__DIR__ . '/../assets/css/control-image-slider.css',
 				array(),
 				1.1,
 				'all'
@@ -27,7 +28,7 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 
 			wp_enqueue_script(
 				'control-image-slider-js',
-				get_stylesheet_directory_uri() . '/includes/customizer/assets/js/control-image-slider.js',
+				__DIR__ . '/../assets/js/control-image-slider.js',
 				array(
 					'jquery',
 					'jquery-ui-sortable',
@@ -52,7 +53,7 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 				<span class="customize-control-title">
 					<?php echo esc_html( $this->label ); ?>
 				</span>
-				<?php
+			<?php
 
 			endif;
 			if ( ! empty( $this->description ) ) :
@@ -62,7 +63,7 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 				<span class="description customize-control-description">
 					<?php echo esc_textarea( $this->description ); ?>
 				</span>
-				<?php
+			<?php
 
 			endif;
 

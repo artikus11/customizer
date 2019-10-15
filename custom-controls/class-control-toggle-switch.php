@@ -22,7 +22,7 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 		 */
 		public function enqueue() {
 
-			wp_enqueue_style( 'skyrocket-control-toggle-switch-css', get_stylesheet_directory_uri() . '/includes/customizer/assets/css/control-toggle-switch.css', array(), '1.0', 'all' );
+			wp_enqueue_style( 'skyrocket-control-toggle-switch-css', __DIR__ . '/../assets/css/control-toggle-switch.css', array(), '1.0', 'all' );
 		}
 
 
@@ -46,7 +46,8 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 						checked( $this->value() );
 						?>
 					>
-					<label class="toggle-switch-label" for="<?php echo esc_attr( $this->id ); ?>"> <span class="toggle-switch-inner"></span> <span class="toggle-switch-switch"></span> </label>
+					<label class="toggle-switch-label" for="<?php echo esc_attr( $this->id ); ?>"> <span class="toggle-switch-inner"></span> <span
+							class="toggle-switch-switch"></span> </label>
 				</div>
 				<span class="customize-control-title"><?php echo esc_html( $this->label ); ?></span>
 				<?php if ( ! empty( $this->description ) ) { ?>

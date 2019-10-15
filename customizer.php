@@ -12,7 +12,7 @@ function customize_preview_js() {
 
 	wp_enqueue_script(
 		'current-customizer-preview',
-		get_stylesheet_directory_uri() . '/includes/customizer/assets/js/customizer-preview.js',
+		__DIR__ .'/assets/js/customizer-preview.js',
 		array( 'customize-preview' ),
 		'1.1.0',
 		true
@@ -39,6 +39,7 @@ function customize_register_options( $wp_customize ) {
 	/**
 	 * Add section Theme Customizer.
 	 */
+
 /*	$wp_customize->add_section(
 		'header_theme',
 		array(

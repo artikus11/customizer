@@ -54,8 +54,8 @@ jQuery(document).ready(function ($) {
 
     // choose images
     $('.slider_upload_image').click(function (e) {
-        var l = 'Загрузить',
-            s = "Выбрать";
+        var l = 'Р—Р°РіСЂСѓР·РёС‚СЊ',
+            s = "Р’С‹Р±СЂР°С‚СЊ";
 
         e.preventDefault();
         var img_url = $(this).prev(),
@@ -127,7 +127,6 @@ jQuery(document).ready(function ($) {
         $(this).parents('.repeat_block').find('.repeat-item-col').toggle();
     });
 
-    // Получаем введенный текст в заголовок
 
     $('.repeat_block').find('textarea[data-name=title]').bind('change keyup', function () {
         var titleSlide = $($(this).parents().get(2)).children('.repeat_title').text($(this).val());

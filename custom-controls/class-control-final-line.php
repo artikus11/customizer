@@ -1,8 +1,9 @@
 <?php
+
 if ( class_exists( 'WP_Customize_Control' ) ) {
 
 	/**
-	 * Simple Title Custom Control
+	 * Final Line
 	 *
 	 * @author ArtAbr
 	 */
