@@ -36,10 +36,33 @@ function customize_register_options( $wp_customize ) {
 	$wp_customize->get_control( 'custom_logo' )->section                     = 'header_theme';
 	$wp_customize->selective_refresh->get_partial( 'custom_logo' )->selector = '.logo-container';
 
+	$transport = ( $wp_customize->selective_refresh ? 'postMessage' : 'refresh' );
 	/**
 	 * Add section Theme Customizer.
 	 */
-
+	$wp_customize->add_section(
+		'header_theme',
+		array(
+			'title'       => 'Шапка',
+			'description' => '',
+			'priority'    => 20,
+		)
+	);
+	$wp_customize->add_section(
+		'footer_theme',
+		array(
+			'title'       => 'Подвал',
+			'description' => '',
+			'priority'    => 30,
+		)
+	);
+	$wp_customize->add_section(
+		'social_profile',
+		array(
+			'title'    => 'Профили на соцсети',
+			'priority' => 35,
+		)
+	);
 /*	$wp_customize->add_section(
 		'header_theme',
 		array(
